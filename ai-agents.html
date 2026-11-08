@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Use DigUp as the scraping tool for your AI agent: MCP apps such as Claude Code, Claude Desktop and Cursor, and browser agents such as Claude in Chrome. Fast, exact, private and free.">
+<title>DigUp for AI agents</title>
+<link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABGUlEQVR4nGNQTX7NgIQFgHSDavLr86rJr/9TGZ+Hmi2AbCey5Qmqya/f08BidPweaheKAxLoYDE6ToA5QIBOPscWEgIM0HghSXNM14f/kzZ+RcEgMTIc0cBAToIDWYgOQGLkJEwGcoKPig74P+qAUQeMOmBoOMCv4T24pIPhtUd/YDgAJIasBqSHqg74+PUfhqW4AEgtVR1AiiNIsZzkNOBQ/u7/tUe/cVoOkgOpoWkiNM59g9URIDGQHF1yAciikzd+wS0HscmxHK8DkOt8XHU9KOWDMLn68ToAOa+Tk8eJ1T/qAKIc8OTNX3BCIwWD9FDNAZQCQg7A2iilkwPO42yWY2t6k4vxZMOGQdExGfCu2aDonA5Y9xwASEGzMzNHfFUAAAAASUVORK5CYII=">
+<style>
+  :root {
+    --bg:#f6f7f9; --surface:#fff; --text:#111827; --muted:#5b6472; --accent:#2563eb; --accent-soft:#e8effd;
+    --border:#dadfe6; --code-bg:#f1f3f6; --good:#15803d; --weak:#9a3412;
+    color-scheme: light dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg:#111317; --surface:#1b1e24; --text:#e8eaed; --muted:#9aa3af; --accent:#60a5fa; --accent-soft:#1d2a40;
+      --border:#2f343c; --code-bg:#14171c; --good:#4ade80; --weak:#fdba74;
+    }
+  }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+  main { max-width:48rem; margin:0 auto; padding:1.25rem 1rem 3rem; }
+  .hero { padding:1.5rem 0 .5rem; }
+  .brand { display:flex; align-items:center; gap:.6rem; color:var(--muted); font-weight:600; margin:0 0 .5rem; }
+  .brand img { width:28px; height:28px; flex:none; border-radius:7px; }
+  h1 { font-size:clamp(1.6rem, 4.5vw, 2.1rem); line-height:1.2; margin:0 0 .6rem; letter-spacing:-.01em; }
+  .lead { font-size:1.075rem; color:var(--muted); margin:0; max-width:40rem; }
+  .pills { display:flex; flex-wrap:wrap; gap:.5rem; list-style:none; padding:0; margin:1rem 0 0; }
+  .pills li { margin:0; background:var(--accent-soft); color:var(--text); border-radius:999px; padding:.2rem .75rem; font-size:.9rem; font-weight:600; }
+  nav.toc { margin:1.25rem 0 0; font-size:.95rem; }
+  nav.toc a { margin-right:1rem; white-space:nowrap; }
+  section { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:1.25rem 1.25rem 1.4rem; margin-top:1.25rem; }
+  h2 { font-size:1.25rem; margin:0 0 .5rem; scroll-margin-top:1rem; }
+  h3 { font-size:1.02rem; margin:1.25rem 0 .3rem; }
+  p, li { margin:.4rem 0; }
+  ul, ol { padding-left:1.35rem; }
+  a { color:var(--accent); }
+  .muted { color:var(--muted); }
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:.75rem; }
+  .card { border:1px solid var(--border); border-radius:10px; padding:.9rem 1rem; }
+  .card h3 { margin-top:0; }
+  .card p { font-size:.95rem; }
+  .tag { display:inline-block; font-size:.75rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--accent); margin-bottom:.2rem; }
+  .table-wrap { overflow-x:auto; margin-top:.75rem; }
+  table { width:100%; border-collapse:collapse; font-size:.95rem; }
+  th, td { text-align:left; vertical-align:top; padding:.5rem .6rem; border-bottom:1px solid var(--border); }
+  thead th { font-size:.85rem; color:var(--muted); font-weight:700; }
+  tbody th { font-weight:600; white-space:nowrap; }
+  td.good { color:var(--good); }
+  td.weak { color:var(--weak); }
+  code, pre { font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-size:.88em; }
+  code { background:var(--code-bg); border:1px solid var(--border); border-radius:5px; padding:.05rem .3rem; overflow-wrap:anywhere; }
+  pre { background:var(--code-bg); border:1px solid var(--border); border-radius:8px; padding:.75rem .9rem; white-space:pre-wrap; overflow-wrap:anywhere; line-height:1.5; margin:.5rem 0; }
+  pre code { background:none; border:0; padding:0; font-size:inherit; }
+  ol.steps { counter-reset:step; list-style:none; padding:0; }
+  ol.steps > li { counter-increment:step; position:relative; padding-left:2.4rem; margin-top:1.1rem; }
+  ol.steps > li::before {
+    content:counter(step); position:absolute; left:0; top:.05rem; width:1.7rem; height:1.7rem; border-radius:50%;
+    background:var(--accent); color:#fff; font-weight:700; font-size:.9rem; display:grid; place-items:center;
+  }
+  @media (prefers-color-scheme: dark) { ol.steps > li::before { color:#0b1220; } }
+  ol.steps h3 { margin:0 0 .2rem; }
+  blockquote { margin:.5rem 0; padding:.5rem .9rem; border-left:3px solid var(--accent); background:var(--accent-soft); border-radius:0 8px 8px 0; }
+  blockquote p { margin:.2rem 0; }
+  dl { margin:.5rem 0 0; }
+  dt { font-weight:600; margin-top:.8rem; }
+  dd { margin:.2rem 0 0; color:var(--muted); }
+  footer { color:var(--muted); font-size:.9rem; text-align:center; margin-top:2rem; }
+  @media (max-width:640px) {
+    .grid2 { grid-template-columns:1fr; }
+    section { padding:1rem; }
+    nav.toc a { display:inline-block; margin:.15rem .9rem .15rem 0; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <header class="hero">
+    <p class="brand">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAYAAADDPmHLAAAEVklEQVR4nO3aMY7TQBTG8Rwhl5jeEhfICZAPQJcaKd22LqhoInEAXFJRcAJXFFTbITpLiC4rDIKVEAgWBo0lk3WCrXhm3sz7j/Rpq13Nm/dLMn6bldkeVh5SmO1hZ7aH2mwPjdkeWrM93JFZad3Z1e4sCx+9WvKPlW6znYDDyzWdO+NSCoD1n58Vr/Aoad3Zr2MBqHi1i0jnehEMwIZXvMi0rjdeAewFFErOZ+8DwNrdSGMXR6almXo3mNr8awFFkXm5noJgSvO56KWb7n8IeOXnn7PvBOcA8JmfT5q5ALjt55fRp4NTz/mxN0v85N6cYAwAQ5580/4PQCVgk8RvqlMAeOTTkX8eDXn160w1BoDPfj1pjwGUAja1WB49/XS39LJ/M3ZdC6ccAqgFbAgAYVMPAWR1+QPApHQ9gELAZgAQJ8XKfeM09kYAECe77D7/ATArdZb/9QPA5DRZPv8DYHLalYBNACBiAACA+JsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAkB+DJi6+LN0/KsrXFPl/xAGyunn+J3avFl60p9rkmA6BH8Pn2V+y+XbxsDVKbLxqAzcOqSxqB3butIfY5JgsgZQQpND8JADabq493b9//iN3Tycvu1e459rllA8DmweObJBDYPdq9xj6v7AD0CN68+x67xyeX3VtKzU8OQJ+Xr7/F7vW9ZfcU+1zUAJCGINXmJw3ACJkaSpzuqQFgIk8NJQ941AAwEaaG0qd76gCYgAOjVAY86gCEQJBb87MDYDxODVOa7qkGYDxMDVOb7qkHYBacGqY43QPAIJcMjFIe8ADgQgQamq8GgJk5NUx9ugeAE5kyNcxlwAOAMwjGZgU5TffEAXj26nb2Z7D9HV/7OR4Y+R7wSKtfPYAhghDTPYn1qwdg3NQwxHRPav3qAYSK5PoBoLx+ACivHwDK6weA8voBoLx+ACivHwDK6weA8voBoLx+ACivHwDK6xcL4MPNz79fyMwhthYAsGYtAChfAFC+AKB8hQTQAkDeCgSgtQAaAMhbgQA0FkANAHkrEIDaAtgBQN4KBGBnARQAkLcCASgsAJsOALJWAAC256segNd7AADmrwAA6iGAEgCyVgAA5RBAkHkAEZO27/sQQCVgYyRMqjEAa9+XQSIinev1PQC8C+hINez5MQDuAnmnPe73GICNgI0SP9lMAWCzF7BZsmz2Y70+BSDIfwlJsDSn+nwOgL0pXgvYPLks18Nb/xwAPBqmn+5c86cA4J0g3Zx95c8B0CPgTpBOminNnwOAp4N0MnrbXwpAPydgWCQv7dhzvg8AfSouiCLSmaPxbigA/d2g4h0hSlp39pM+630BGKZ03zLhXcFfOnfG5VJ9WxLAMIX7tnHtbqS8Q8xP686udmdZ+OjVb1AshngXRS2jAAAAAElFTkSuQmCC" alt="" width="28" height="28">
+      DigUp
+    </p>
+    <h1>DigUp for AI agents</h1>
+    <p class="lead">DigUp is a point-and-click web scraper for Chrome. It is fast, exact, private and free, for people and for AI agents. Your agent decides what to collect; DigUp collects it, in your own Chrome.</p>
+    <ul class="pills" aria-label="DigUp in four words">
+      <li>Fast</li><li>Exact</li><li>Private</li><li>Free</li>
+    </ul>
+    <nav class="toc" aria-label="On this page">
+      <a href="#why">Why DigUp</a>
+      <a href="#mcp">MCP apps</a>
+      <a href="#tools">Tools</a>
+      <a href="#browser">Browser agents</a>
+      <a href="#rules">Rules and limits</a>
+      <a href="#help">Troubleshooting</a>
+    </nav>
+  </header>
+
+  <section aria-labelledby="why">
+    <h2 id="why">Why give your agent DigUp</h2>
+    <p>An AI agent can read a page and write out a table itself. That is fine for a few rows. For real lists, DigUp does the collecting:</p>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col"></th><th scope="col">Agent on its own</th><th scope="col">Agent with DigUp</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Speed</th><td class="weak">Reads and reasons about every page</td><td class="good">Thousands of rows in seconds</td></tr>
+          <tr><th scope="row">Exactness</th><td class="weak">Can skip rows or change values</td><td class="good">Every row as the page shows it</td></tr>
+          <tr><th scope="row">Scale</th><td class="weak">Long pages fill the context window</td><td class="good">Up to 50 pages and 5,000 rows</td></tr>
+          <tr><th scope="row">Repeatable</th><td class="weak">Columns can differ each run</td><td class="good">Same clean column names every time</td></tr>
+          <tr><th scope="row">Cost</th><td class="weak">Every page uses model tokens</td><td class="good">Free; the agent only reads the result</td></tr>
+          <tr><th scope="row">Privacy</th><td>Depends on the agent</td><td class="good">DigUp sends nothing anywhere</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <span class="tag">Apps on your computer</span>
+        <h3>MCP apps</h3>
+        <p>Claude Code, Claude Desktop, Cursor and other apps that use MCP servers. They can list your open tabs, find the lists on a page and scrape it, next pages included.</p>
+        <p><a href="#mcp">Set up the MCP link</a></p>
+      </div>
+      <div class="card">
+        <span class="tag">Agents inside Chrome</span>
+        <h3>Browser agents</h3>
+        <p>Agents that work in your Chrome and can run a script on the page, such as Claude in Chrome. They ask DigUp to scrape the page they are on.</p>
+        <p><a href="#browser">Turn on the page API</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="mcp">
+    <h2 id="mcp">Connect MCP apps</h2>
+    <p class="muted">About two minutes. You need DigUp 1.2 or later and <a href="https://nodejs.org/" target="_blank" rel="noopener noreferrer">Node.js</a> 18 or later. Nothing else to install.</p>
+    <ol class="steps">
+      <li>
+        <h3>Open DigUp's AI tools page</h3>
+        <p>Open DigUp's side panel, click the <strong>&hellip;</strong> menu and choose <strong>AI tools</strong>. If DigUp asks, press <strong>Allow DigUp on all sites</strong>: agents read pages without you clicking DigUp's icon each time.</p>
+      </li>
+      <li>
+        <h3>Turn on "Connect AI tools on this computer"</h3>
+        <p>The page shows your <strong>pairing code</strong> and the port (47615 unless you change it).</p>
+      </li>
+      <li>
+        <h3>Download the DigUp MCP server</h3>
+        <p>Press <strong>Download digup-mcp.mjs</strong>. It is one small file that talks only to DigUp, on <code>127.0.0.1</code> (your own computer).</p>
+      </li>
+      <li>
+        <h3>Add it to your app</h3>
+        <p>The AI tools page shows both of these with your own code and path filled in, ready to copy.</p>
+        <p><strong>Claude Code</strong>, in a terminal:</p>
+        <pre><code>claude mcp add digup -- node "C:/Users/you/Downloads/digup-mcp.mjs" --code ABCD-EFGH-JKLM</code></pre>
+        <p><strong>Claude Desktop, Cursor and others</strong>, in the app's MCP servers settings (Claude Desktop: Settings, Developer, Edit Config; Cursor: Settings, MCP):</p>
+<pre><code>{
+  "mcpServers": {
+    "digup": {
+      "command": "node",
+      "args": ["C:/Users/you/Downloads/digup-mcp.mjs", "--code", "ABCD-EFGH-JKLM"]
+    }
+  }
+}</code></pre>
+        <p class="muted">On a Mac or Linux the path looks like <code>/Users/you/Downloads/digup-mcp.mjs</code>. Restart the app after you change its settings.</p>
+      </li>
+      <li>
+        <h3>Ask your app</h3>
+        <p>DigUp's status changes to <strong>Connected</strong> within about 30 seconds. Then ask, for example:</p>
+        <blockquote><p>Use DigUp to find the lists on https://books.toscrape.com and scrape the book list, 3 pages.</p></blockquote>
+        <p>DigUp opens the page in a background tab, collects the rows and closes the tab again.</p>
+      </li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="tools">
+    <h2 id="tools">What your app can ask DigUp</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col">Tool</th><th scope="col">What it does</th></tr></thead>
+        <tbody>
+          <tr><th scope="row"><code>digup_tabs</code></th><td>Lists the web pages open in your Chrome (tab id, title, address), so the agent can work on a page you already have open and signed in to.</td></tr>
+          <tr><th scope="row"><code>digup_find_lists</code></th><td>Finds the tables and repeating lists on a page, best match first, with a sample of each. Give a <code>url</code> or a <code>tabId</code>.</td></tr>
+          <tr><th scope="row"><code>digup_scrape</code></th><td>Returns the rows of one list as objects with clean column names (Title, Price, Email&hellip;). Options: <code>list</code> (which list, default the best), <code>pages</code> (1&ndash;50), <code>mode</code> (<code>auto</code>, <code>next</code>, <code>scroll</code> or <code>none</code>), <code>delaySeconds</code> (at least 1) and <code>maxRows</code> (up to 5,000).</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3>More things to ask</h3>
+    <ul>
+      <li>Scrape the job list in my open tab, all pages up to 10, and save it as a CSV.</li>
+      <li>Find the lists on this page and tell me which one has the prices.</li>
+      <li>Scrape the first 200 products here, then compare the prices with last week's file.</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="browser">
+    <h2 id="browser">Let browser agents use DigUp</h2>
+    <ol class="steps">
+      <li>
+        <h3>Turn on "Let AI agents use DigUp on pages"</h3>
+        <p>On DigUp's AI tools page. It works on pages you open or reload from then on.</p>
+      </li>
+      <li>
+        <h3>Tell your agent how to ask</h3>
+        <p>The AI tools page has this text ready to copy. The agent runs it in the page:</p>
+<pre><code>window.addEventListener('message', (e) =&gt; {
+  if (e.data &amp;&amp; e.data.digup === 'response') console.log(JSON.stringify(e.data));
+});
+window.postMessage({ digup: 'request', id: 1, action: 'find_lists' }, '*');
+window.postMessage({ digup: 'request', id: 2, action: 'scrape', options: { list: 0, maxRows: 500 } }, '*');</code></pre>
+        <p>Each response has the same <code>id</code> and either <code>result</code> or <code>error</code>. <code>scrape</code> takes <code>list</code>, <code>maxRows</code> (up to 5,000), and <code>pages</code> with <code>mode: 'scroll'</code> for infinite scroll. Action <code>help</code> lists every option.</p>
+      </li>
+    </ol>
+    <p class="muted">While this is on, websites can see that DigUp is installed. A page can only get data from itself, which it can already read, never from another site. For pages with a Next button, use the side panel or the MCP link.</p>
+  </section>
+
+  <section aria-labelledby="rules">
+    <h2 id="rules">Rules and limits</h2>
+    <ul>
+      <li><strong>Off until you turn them on.</strong> Both options live on DigUp's AI tools page and can be turned off there at any time.</li>
+      <li><strong>Polite by design.</strong> At least 1 second between pages, at most 50 pages and 5,000 rows per request.</li>
+      <li><strong>No getting past checks.</strong> Bot checks, CAPTCHAs and sign-in pages are reported to the agent, never bypassed. The agent asks you to handle them in Chrome.</li>
+      <li><strong>Paired and local.</strong> DigUp answers the MCP server only after it sends your pairing code, and only on <code>127.0.0.1</code>.</li>
+      <li><strong>Nothing sent to us.</strong> Pages are read in your own Chrome. What your AI app does with the rows is up to that app. See the <a href="privacy.html">privacy policy</a>.</li>
+      <li><strong>Respect each site.</strong> Only collect data you are allowed to use, and follow each website's terms.</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="help">
+    <h2 id="help">Troubleshooting</h2>
+    <dl>
+      <dt>The status says "Not connected"</dt>
+      <dd>Your app starts the MCP server when it starts, so restart the app. Check that <code>node --version</code> shows 18 or later and that the path to <code>digup-mcp.mjs</code> is right.</dd>
+      <dt>"The wrong pairing code"</dt>
+      <dd>After you press <strong>New code</strong>, copy the command or settings again from the AI tools page and restart your app.</dd>
+      <dt>The port is in use</dt>
+      <dd>Pick another port on the AI tools page; the copied command then includes <code>--port</code>.</dd>
+      <dt>The first request waits a while</dt>
+      <dd>DigUp looks for the server every 30 seconds, and at once when you switch to Chrome. Click into Chrome to connect sooner.</dd>
+      <dt>The agent says a page needs a check or a sign-in</dt>
+      <dd>Open that page in Chrome, sign in or finish the check yourself, then ask again with that tab.</dd>
+      <dt>Browser agent gets no answer</dt>
+      <dd>Reload the page after turning the option on, and check that "Allow DigUp on all sites" is on.</dd>
+    </dl>
+    <p>Still stuck? Use <strong>Report a problem</strong> in DigUp's menu.</p>
+  </section>
+
+  <footer>DigUp &middot; <a href="privacy.html">Privacy policy</a></footer>
+</main>
+</body>
+</html>
