@@ -63,6 +63,21 @@
   .promise li::before { content:"\2713"; color:var(--good); font-weight:800; margin-right:6px; }
   .hero-shot { margin:40px auto 0; max-width:1040px; border-radius:16px; overflow:hidden; border:1px solid var(--border); box-shadow:0 30px 80px rgba(16,24,40,.18); background:var(--surface); }
   .hero-shot img { display:block; width:100%; height:auto; }
+  /* the demo video: our own poster first; YouTube (privacy-enhanced) loads only when played */
+  .video { position:relative; display:block; aspect-ratio:16 / 10; color:inherit; text-decoration:none; cursor:pointer; }
+  .video img, .video iframe { position:absolute; inset:0; width:100%; height:100%; border:0; object-fit:cover; }
+  .video .play {
+    position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); display:flex; align-items:center; gap:12px;
+    padding:14px 22px 14px 16px; border-radius:999px; background:rgba(17,24,39,.88); color:#fff; font-weight:650; font-size:17px;
+    box-shadow:0 12px 32px rgba(0,0,0,.35); transition:transform .15s ease, background .15s ease;
+  }
+  .video .play svg { width:34px; height:34px; flex:none; }
+  .video:hover .play { background:#1d4ed8; transform:translate(-50%,-50%) scale(1.04); }
+  .video:focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
+  @media (prefers-reduced-motion: reduce) { .video .play { transition:none; } .video:hover .play { transform:translate(-50%,-50%); } }
+  .video-note { margin:10px 0 0; color:var(--muted); font-size:13px; }
+  .video .play { white-space:nowrap; }
+  @media (max-width: 560px) { .video .play { gap:8px; padding:8px 14px 8px 9px; font-size:14px; } .video .play svg { width:26px; height:26px; } }
 
   section { padding:72px 0 0; }
   h2 { font-size:clamp(26px, 3.6vw, 36px); line-height:1.15; letter-spacing:-.01em; margin:0; text-align:center; }
@@ -159,7 +174,13 @@
       <ul class="promise">
         <li>No account</li><li>No row limits or credits</li><li>Runs on your device</li><li>Works on any website</li>
       </ul>
-      <div class="hero-shot"><img src="img/detect.png" width="1280" height="800" alt="DigUp's side panel next to a shop page: it found the product list and shows the rows ready to export."></div>
+      <div class="hero-shot">
+        <a class="video" id="demo-video" href="https://youtu.be/x_RWr90C6h0" data-video="x_RWr90C6h0" aria-label="Play the 32-second DigUp demo video">
+          <img src="img/detect.png" width="1280" height="800" alt="DigUp's side panel next to a shop page: it found the product list and shows the rows ready to export.">
+          <span class="play"><svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="17" fill="#2563eb"/><path d="M13.5 10.5v13l10.5-6.5z" fill="#fff"/></svg>Watch the 32-second demo</span>
+        </a>
+      </div>
+      <p class="video-note">The video plays from YouTube, in its privacy-enhanced mode, only when you press play.</p>
     </section>
 
     <section id="how" aria-labelledby="h-how">
@@ -268,6 +289,24 @@
     </section>
   </div>
 </main>
+<script>
+  // Swap the poster for YouTube's privacy-enhanced player, only when the visitor asks for it.
+  (function () {
+    var v = document.getElementById('demo-video');
+    if (!v) return;
+    v.addEventListener('click', function (e) {
+      e.preventDefault();
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/' + v.getAttribute('data-video') + '?autoplay=1&rel=0&modestbranding=1';
+      f.title = 'DigUp demo video';
+      f.allow = 'autoplay; encrypted-media; picture-in-picture';
+      f.allowFullscreen = true;
+      v.replaceWith(Object.assign(document.createElement('div'), { className: 'video' }));
+      document.querySelector('.hero-shot .video').appendChild(f);
+      f.focus();
+    });
+  })();
+</script>
 
 <footer>
   <nav aria-label="More">
