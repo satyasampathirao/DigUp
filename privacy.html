@@ -25,23 +25,33 @@
 <main>
 <article>
   <h1>DigUp Privacy Policy</h1>
-  <p class="meta">Effective date: 2026-11-07</p>
+  <p class="meta">Effective date: 2026-11-11</p>
 
   <p class="lead">DigUp does not collect, transmit, sell or share any personal or browsing data. Everything happens on your device.</p>
 
   <h2>What DigUp does</h2>
-  <p>DigUp is a Chrome extension that reads tables and lists from the web page you are viewing and lets you export them as CSV, Excel or JSON files, or copy them for Google Sheets.</p>
+  <p>DigUp is a Chrome extension that reads tables and lists from the web page you are viewing, or from files you choose on your computer, and lets you export them as CSV, Excel, JSON or PDF files, or copy them for Google Sheets.</p>
 
   <h2>Data we collect</h2>
-  <p>None. DigUp has no servers, no accounts and no analytics. It does not collect personal information, browsing history, page content or usage statistics, and it sends nothing to us. The only requests it makes are the ones you start or turn on yourself: the detail-page fetches described below, page checks, sending rows to a webhook or a Google Sheet you choose, and, only if you turn on the MCP link under AI tools, a connection to a program on your own computer.</p>
+  <p>None. DigUp has no servers, no accounts and no analytics. It does not collect personal information, browsing history, page content or usage statistics, and it sends nothing to us. The only requests it makes are the ones you start or turn on yourself: the detail-page fetches described below, page checks, sending rows to a webhook or a Google Sheet you choose, the text-recognition language data downloaded once if you choose "Read with OCR", and, only if you turn on the MCP link under AI tools, a connection to a program on your own computer.</p>
 
   <h2>How your data is handled</h2>
   <ul>
     <li><strong>Scraping happens locally.</strong> The page is read and processed inside your browser. Nothing is sent to us or to any third party.</li>
     <li><strong>Saved site setups</strong> (the list you chose, column names and the Next button for a site, plus a short fingerprint of the page you saved it on, never the page address itself, so DigUp can tell you when that page's layout may have changed) are stored in <code>chrome.storage.local</code> on your device so DigUp can offer them on your next visit. You can reset them in the panel, or remove them by uninstalling the extension.</li>
     <li><strong>Recent results</strong> are kept in <code>chrome.storage.session</code> so you can restore them if the panel is reopened, and to show them in a tab of DigUp's own when you choose "Open as page". Chrome clears this when the browser closes.</li>
-    <li><strong>Exports are files you download.</strong> CSV, Excel and JSON files are saved to your computer by your browser, and "Copy" places text on your clipboard. What you do with them afterwards is up to you.</li>
+    <li><strong>Exports are files you download.</strong> CSV, Excel, JSON and PDF files are saved to your computer by your browser, and "Copy" places text on your clipboard. What you do with them afterwards is up to you.</li>
+    <li><strong>Edits on the results page.</strong> If you edit the table in "Open as page", your edited table is kept in <code>chrome.storage.session</code> while that tab is open, so a reload keeps your changes. "Revert" removes it, and Chrome clears it when the browser closes.</li>
   </ul>
+
+  <h2>Files on your computer</h2>
+  <p>In the panel's Files mode you can choose files or a folder, or drop them on the panel: saved web pages, CSV, Excel, JSON, Word and PDF files, and pictures of text. DigUp reads them inside your browser, on your computer. They are never uploaded, to us or to anyone else. A saved web page is shown to DigUp without its scripts, and without the images, fonts and styles it points to on the internet: nothing it refers to is loaded. Chrome may use the word "upload" when you choose a folder; the files still stay on your computer.</p>
+  <ul>
+    <li><strong>Read again.</strong> If you choose a folder, Chrome lets DigUp keep a handle to that folder (never the files or what is in them) in your browser's storage (IndexedDB), so you can read it again later. Chrome asks you before DigUp reads the folder again. DigUp also keeps the setup you used for that folder (the list you chose and its columns) in <code>chrome.storage.local</code>.</li>
+  </ul>
+
+  <h2>Text recognition (OCR)</h2>
+  <p>Scans and photos of text are read with text recognition that runs on your computer (Tesseract.js, which comes with DigUp). It needs language data (about 3 MB for one language). The first time you press "Read with OCR" for a language, DigUp downloads that data from the jsDelivr network (<code>cdn.jsdelivr.net</code>) and your browser keeps it for next time. Like any web request, jsDelivr sees your IP address and which language file is asked for; your files and their text are never sent. DigUp says this in the panel before you press the button.</p>
 
   <h2>Details from each page</h2>
   <p>If you press "Get details" in the panel, DigUp fetches the pages linked from the rows you scraped, only from the same site you are scraping, to read fields such as title, description, price, email and phone. This only happens when you start it, you can stop it at any time, and the results stay on your device. Those pages are requested from that site directly, with your existing sign-in for that site, just as your browser would request them; nothing is sent to us. If a page redirects to another site, the browser follows the redirect as usual and DigUp discards that result.</p>
@@ -86,7 +96,7 @@
   <ul>
     <li>No analytics or tracking</li>
     <li>No advertising</li>
-    <li>No remote code: all code ships inside the extension</li>
+    <li>No remote code: all code ships inside the extension (OCR language data is data, not code)</li>
     <li>No selling or sharing of data, because none is collected</li>
   </ul>
 
