@@ -25,7 +25,7 @@
 <main>
 <article>
   <h1>DigUp Privacy Policy</h1>
-  <p class="meta">Effective date: 2026-11-11</p>
+  <p class="meta">Effective date: 2026-11-13</p>
 
   <p class="lead">DigUp does not collect, transmit, sell or share any personal or browsing data. Everything happens on your device.</p>
 
@@ -33,7 +33,7 @@
   <p>DigUp is a Chrome extension that reads tables and lists from the web page you are viewing, or from files you choose on your computer, and lets you export them as CSV, Excel, JSON or PDF files, or copy them for Google Sheets.</p>
 
   <h2>Data we collect</h2>
-  <p>None. DigUp has no servers, no accounts and no analytics. It does not collect personal information, browsing history, page content or usage statistics, and it sends nothing to us. The only requests it makes are the ones you start or turn on yourself: the detail-page fetches described below, page checks, sending rows to a webhook or a Google Sheet you choose, the text-recognition language data downloaded once if you choose "Read with OCR", and, only if you turn on the MCP link under AI tools, a connection to a program on your own computer.</p>
+  <p>None. DigUp has no servers, no accounts and no analytics. It does not collect personal information, browsing history, page content or usage statistics, and it sends nothing to us. The only requests it makes are the ones you start or turn on yourself: the detail-page fetches described below, the pages of a list of web addresses you paste, page checks, sending rows to a webhook or a Google Sheet you choose, the text-recognition language data downloaded once if you choose "Read with OCR", requests to Anthropic only if you add your own Claude API key, and, only if you turn on the MCP link under AI tools, a connection to a program on your own computer.</p>
 
   <h2>How your data is handled</h2>
   <ul>
@@ -56,12 +56,18 @@
   <h2>Details from each page</h2>
   <p>If you press "Get details" in the panel, DigUp fetches the pages linked from the rows you scraped, only from the same site you are scraping, to read fields such as title, description, price, email and phone. This only happens when you start it, you can stop it at any time, and the results stay on your device. Those pages are requested from that site directly, with your existing sign-in for that site, just as your browser would request them; nothing is sent to us. If a page redirects to another site, the browser follows the redirect as usual and DigUp discards that result.</p>
 
+  <h2>A list of web addresses</h2>
+  <p>In Files mode you can paste a list of web addresses. When you press "Read these pages", Chrome first asks you to allow DigUp to open those sites. DigUp then requests each page from its site directly, one at a time with a pause between pages, with your existing sign-in for that site, just as your browser would, and reads it on your computer like a saved page. The addresses and pages are not stored after you close the panel, except the setup you used, which is kept in <code>chrome.storage.local</code> per site. Nothing is sent to us. A page that asks you to sign in or to check that you're human is skipped and listed with the reason; DigUp never works around it.</p>
+
   <h2>Optional site access</h2>
   <p>DigUp does not ask for access to all sites when you install it. Chrome asks you to allow access to a site only when you start something that needs it: a multi-page run that uses a Next button (infinite-scroll runs stay on the current page and do not need it), or "Details from each page". You can also choose "Allow DigUp on all sites" in the panel's menu: with it on, DigUp also rescans a tab's page when that page reloads in a tab where DigUp's panel is open. That option is off by default, is granted only by you, and you can switch it off from the same menu or revoke any access at any time in Chrome's extension settings.</p>
 
   <h2>Describe columns</h2>
   <p>When you type the columns you want and press "Get columns", DigUp sends the column names you typed and a few sample values from the first rows to Chrome's built-in AI, which runs on your own computer, to choose the matching fields. Nothing is sent to us or to anyone else. DigUp uses the built-in AI only when its model is already on your computer; it never starts Chrome's model download (about 2–4 GB) unless you press "Use built-in AI". Where the built-in AI is not available, DigUp matches by name without any AI.</p>
   <p>If you ask for an AI column (for example "summary of description"), DigUp sends each row's value of that field to the same built-in AI on your computer, one row at a time, and shows its answer in a column marked "(AI)". Nothing is sent to us or anyone else.</p>
+
+  <h3>Your own Claude API key (optional, off by default)</h3>
+  <p>On DigUp's AI tools page you can add your own API key from Anthropic, so that Describe and AI columns use Claude instead of Chrome's built-in AI. Only then, and only when you use Describe or an AI column, DigUp sends Anthropic's API (<code>api.anthropic.com</code>) the words you typed, the column names and a few sample values (Describe), or the text of each cell an AI column reads. Anthropic handles that data under its own terms and privacy policy, for your account, which it bills. Your key is kept in <code>chrome.storage.local</code> in this browser (never synced) and is sent only to Anthropic. DigUp sends one short test question when you save the key. "Remove key" deletes it, and DigUp goes back to the built-in AI.</p>
 
   <h2>AI tools (optional, off by default)</h2>
   <p>DigUp's AI tools page (DigUp menu, AI tools) has two options. Both are off until you turn them on, both need "Allow DigUp on all sites", and you can turn them off at any time on the same page.</p>
@@ -82,6 +88,10 @@
 
   <h2>Page checks (optional)</h2>
   <p>If you turn on "Check this page for changes" for a page, DigUp keeps that page's address and setup in <code>chrome.storage.local</code>, and Chrome first asks you to allow DigUp to open that site by itself. While Chrome is open, every 12 hours, day or week as you chose, DigUp opens the page in a background tab, reads the list, closes the tab, and compares the rows with the last check (Chrome's <code>alarms</code> feature starts each check). The latest rows and what changed stay on your device, shown on DigUp's Saved setups page and as a number on DigUp's icon. If you chose a webhook or a Google Sheet for the changes, they are sent there too. Checks keep at least one second between pages and at most 50 pages, and a bot check or sign-in page stops the check instead of being bypassed. Turning a check off deletes its saved rows.</p>
+  <p><strong>Desktop alerts.</strong> If you leave "Show a desktop alert when something changes" on (or turn Alerts on for a check on the Saved setups page), Chrome first asks you to allow DigUp to show notifications. DigUp then shows a notification on this computer when a check finds changes, or once when a check stops working; it shows the page's name and the first change. Notifications are made by Chrome on your device; nothing is sent anywhere.</p>
+
+  <h2>First-run tour</h2>
+  <p>The first time you open the panel, DigUp shows a short tour. DigUp records in <code>chrome.storage.local</code> that you finished or skipped it, so it isn't shown again. "Try with sample files" opens three made-up sales files that come with DigUp.</p>
 
   <h2>Rating reminder</h2>
   <p>After a few exports DigUp may show an occasional "Rate DigUp" reminder card, at most once a day; choosing "Don't ask again" stops it. To decide when to show it, DigUp counts how many times you export and records when the card was last shown. These are kept in <code>chrome.storage.local</code> on your device and are never sent anywhere. The card links to the Chrome Web Store only if you click it.</p>

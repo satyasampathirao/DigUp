@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="How DigUp compares with other kinds of web scraper extensions: free with no row limits or credits, private, files as well as pages, and a table you can clean up before you save.">
+<title>Why DigUp</title>
+<link rel="icon" href="img/icon128.png">
+<style>
+  :root {
+    --bg:#f6f7f9; --surface:#fff; --text:#111827; --muted:#5b6472; --accent:#2563eb; --accent-soft:#e8effd;
+    --border:#dadfe6; --good:#15803d; --part:#9a3412; --cta-text:#fff;
+    color-scheme: light dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#111317; --surface:#1b1e24; --text:#e8eaed; --muted:#9aa3af; --accent:#60a5fa; --accent-soft:#1d2a40; --border:#2f343c; --good:#4ade80; --part:#fdba74; --cta-text:#0b1220; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--text); font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+  main { max-width:56rem; margin:0 auto; padding:1.25rem 1rem 3rem; }
+  .brand { display:flex; align-items:center; gap:.6rem; color:var(--muted); font-weight:600; margin:1.5rem 0 .5rem; }
+  .brand img { width:28px; height:28px; border-radius:7px; }
+  h1 { font-size:clamp(1.6rem,4.5vw,2.1rem); line-height:1.2; margin:0 0 .6rem; letter-spacing:-.01em; }
+  .lead { font-size:1.075rem; color:var(--muted); margin:0; max-width:42rem; }
+  section { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:1.25rem; margin-top:1.25rem; }
+  h2 { font-size:1.25rem; margin:0 0 .5rem; }
+  a { color:var(--accent); }
+  .muted { color:var(--muted); font-size:.92rem; }
+  .table-wrap { overflow-x:auto; margin-top:.5rem; }
+  table { width:100%; border-collapse:collapse; min-width:40rem; font-size:.95rem; }
+  th, td { text-align:left; vertical-align:top; padding:.55rem .6rem; border-bottom:1px solid var(--border); }
+  thead th { font-size:.85rem; color:var(--muted); font-weight:600; }
+  th[scope=row] { font-weight:600; }
+  td.digup { background:var(--accent-soft); }
+  .yes { color:var(--good); font-weight:600; }
+  .part { color:var(--part); font-weight:600; }
+  .reasons { display:grid; grid-template-columns:repeat(auto-fit,minmax(15rem,1fr)); gap:1rem; list-style:none; padding:0; margin:.5rem 0 0; }
+  .reasons li { border:1px solid var(--border); border-radius:10px; padding:.9rem 1rem; }
+  .reasons strong { display:block; margin-bottom:.2rem; }
+  .cta { display:inline-block; margin-top:1rem; background:var(--accent); color:var(--cta-text); text-decoration:none; font-weight:600; padding:.6rem 1.1rem; border-radius:8px; }
+  footer { margin-top:2rem; color:var(--muted); font-size:.9rem; }
+</style>
+</head>
+<body>
+<main>
+  <p class="brand"><img src="img/icon128.png" alt="">DigUp</p>
+  <h1>Why people switch to DigUp</h1>
+  <p class="lead">Most scraper extensions fall into three kinds. Here is how DigUp compares with each, honestly, including what it doesn't do.</p>
+
+  <section aria-labelledby="h-table">
+    <h2 id="h-table">At a glance</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col"><span class="muted">Feature</span></th><th scope="col">DigUp</th><th scope="col">One-click table grabbers</th><th scope="col">Visual sitemap builders</th><th scope="col">AI scrapers with credits</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Price</th><td class="digup"><span class="yes">Free</span>, with no row limits or credits</td><td>Usually free</td><td>Free in the browser; scheduling and cloud runs are paid</td><td>Pay per row or page, monthly plans</td></tr>
+          <tr><th scope="row">Where your data goes</th><td class="digup"><span class="yes">Stays on your computer</span>; DigUp has no server</td><td>Usually local</td><td>Local, or their cloud for paid runs</td><td>Pages go to their AI service</td></tr>
+          <tr><th scope="row">PDF, Word, Excel and scans</th><td class="digup"><span class="yes">Yes</span>, many files into one table, OCR on your computer</td><td>No</td><td>No</td><td>Some, as paid extras</td></tr>
+          <tr><th scope="row">A list of web addresses</th><td class="digup"><span class="yes">Yes</span>, one setup for every page, one page at a time</td><td>No</td><td>Yes, with a sitemap</td><td>Yes, with credits per page</td></tr>
+          <tr><th scope="row">Clean up before saving</th><td class="digup"><span class="yes">Yes</span>: edit cells, split, trim, change case, remove duplicates, undo</td><td>Rename or remove columns</td><td>No; clean up in a spreadsheet</td><td>Some AI clean-up</td></tr>
+          <tr><th scope="row">More pages and details</th><td class="digup"><span class="yes">Yes</span>: Next button, endless scrolling, each item's own page</td><td>Next button only</td><td>Yes, after setup</td><td>Yes</td></tr>
+          <tr><th scope="row">Changes on a page</th><td class="digup"><span class="yes">Free</span> checks with desktop alerts, a webhook or a Google Sheet</td><td>No</td><td>Paid cloud scheduling</td><td>Paid plans</td></tr>
+          <tr><th scope="row">AI</th><td class="digup">Chrome's built-in AI on your computer, or <span class="part">your own Claude key</span> if you choose</td><td>None</td><td>None</td><td>Their AI, in their cloud</td></tr>
+          <tr><th scope="row">For AI agents</th><td class="digup"><span class="yes">Yes</span>: an MCP server and a page API, off until you turn them on</td><td>No</td><td>API on paid plans</td><td>API on paid plans</td></tr>
+          <tr><th scope="row">Learning curve</th><td class="digup">Open the panel and choose a list; a short tour shows the rest</td><td>None</td><td>Steep: selectors and sitemaps</td><td>Low</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted">Compared with the common kinds of scraper extensions as of November 2026, from their public pages and reviews. Each product is different; check the one you use.</p>
+  </section>
+
+  <section aria-labelledby="h-why">
+    <h2 id="h-why">Five reasons to switch</h2>
+    <ul class="reasons">
+      <li><strong>No meter running</strong>Every row, page and export is free. There are no credits to watch.</li>
+      <li><strong>Your data stays yours</strong>Pages and files are read on your computer. Nothing comes to us: DigUp has no server.</li>
+      <li><strong>Pages and files, one table</strong>Saved pages, CSV, Excel, Word, PDF and scans, or a pasted list of web addresses.</li>
+      <li><strong>Clean before you save</strong>A real spreadsheet: trim, split, change case, keep only numbers, remove duplicates, undo.</li>
+      <li><strong>Honest by design</strong>DigUp never works around sign-ins, paywalls or checks that you're human. It stops and tells you.</li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="h-not">
+    <h2 id="h-not">What DigUp doesn't do</h2>
+    <ul>
+      <li>Check pages while Chrome is closed. Checks run in your browser, so your data never sits on someone else's server.</li>
+      <li>Get past sign-ins, paywalls or bot checks. That's on purpose.</li>
+      <li>Send anything to an AI in the cloud, unless you add your own Claude key.</li>
+    </ul>
+    <a class="cta" href="https://chromewebstore.google.com/detail/hbojoclhnohajcagdelbelbelhkahbjj?utm_source=website&amp;utm_medium=compare">Add DigUp to Chrome, free</a>
+  </section>
+
+  <footer><a href="index.html">DigUp home</a> · <a href="privacy.html">Privacy policy</a></footer>
+</main>
+</body>
+</html>
