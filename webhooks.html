@@ -148,6 +148,30 @@ Changed:
     <p class="muted">Only collect contact details you are allowed to use, and follow each website's terms and your local privacy laws.</p>
   </section>
 
+  <section aria-labelledby="recipes">
+    <h2 id="recipes">Ready-made recipes</h2>
+    <p>Three set-ups people use most. Each one starts from a webhook in your automation tool and a page check in DigUp (the send button, then <strong>Check this page for changes</strong>, with <strong>Send changes to: The webhook above</strong>).</p>
+    <h3>New leads into your CRM, with no repeats</h3>
+    <ol>
+      <li>In DigUp, turn on a check for the directory page. From then on your tool receives only what is new, in <code>changes.added</code>.</li>
+      <li>In your tool, loop over <code>changes.added</code> and add a filter: continue only when <code>Email</code> is not empty.</li>
+      <li>Add the action <em>Create or update contact</em> and map <code>Name</code>, <code>Email</code>, <code>Phone</code> and <code>Website</code> to your CRM's fields. Use the email as the key so a person is never added twice.</li>
+    </ol>
+    <h3>A price drop into your team chat</h3>
+    <ol>
+      <li>Paste a Slack or Discord webhook address in DigUp instead of an automation tool's. DigUp then writes the message itself.</li>
+      <li>Turn on the check for the product list. Each change arrives as a line such as "Standing desk: Price 21,999 → 18,499 (−16%)", biggest drops first.</li>
+      <li>For one price you care about, use <strong>Tell me when a price is at or below</strong> on DigUp's Saved setups page as well: that alert shows on your desktop.</li>
+    </ol>
+    <h3>New listings as cards in your tracker</h3>
+    <ol>
+      <li>Turn on a check for the listings page (jobs, apartments, tenders).</li>
+      <li>In your tool, loop over <code>changes.added</code> and add the action <em>Create card</em> (Trello), <em>Create task</em> (Asana) or <em>Create record</em> (Airtable, Notion).</li>
+      <li>Map <code>Title</code> to the card's name and the row's link to its description, so one click opens the listing.</li>
+    </ol>
+    <p class="muted">Prefer no automation tool at all? Choose <strong>One Google Sheet, kept up to date</strong> for a check: DigUp then updates the same sheet in your own Google Drive on every check.</p>
+  </section>
+
   <section aria-labelledby="more">
     <h2 id="more">More apps</h2>
     <p>The same pattern works for Notion and Airtable databases (one record per row), Microsoft Excel online, Trello or Asana tasks, Discord messages, and thousands of other apps your automation tool connects to.</p>
