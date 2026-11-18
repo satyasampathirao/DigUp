@@ -6,7 +6,7 @@
 
 <p align="center">
   <strong>Turn any web page into a clean spreadsheet, in one click.</strong><br>
-  A free, point-and-click web scraper for Chrome. No account, no limits, and nothing leaves your browser.
+  A free, point-and-click web scraper for Chrome. No account, no limits, and nothing you copy leaves your browser.
 </p>
 
 <p align="center">
@@ -28,10 +28,10 @@
 
 ## What DigUp does
 
-DigUp finds the tables and lists on a web page, gives the columns clear names, and exports every row to **CSV, Excel, JSON or Google Sheets**. It follows the Next button for more pages, adds details from each item's own page, and can check a page for changes every day.
+DigUp finds the tables and lists on a web page, gives the columns clear names, and exports every row to **CSV, Excel, JSON or Google Sheets**. It follows the Next button for more pages, adds details from each item's own page, and can check a page for changes every day. It also reads the tickets, boards and dashboards of ticket trackers and project tools, and files on your computer: saved pages, CSV, Excel, Word, PDF and scans.
 
 - ✅ **Free:** no account, no subscription, no credits, no row limits
-- 🔒 **Private:** pages are read on your computer; rows go only where you send them
+- 🔒 **Private:** pages are read on your computer; rows go only where you send them, and usage sharing is your choice
 - 🎯 **Exact:** every row is copied as the page shows it, nothing guessed or rewritten
 - ⚡ **Fast:** thousands of rows in seconds, up to 50 pages in one run
 - 🔁 **Repeatable:** DigUp remembers your setup for each website
@@ -63,6 +63,12 @@ DigUp finds the page's **Next** button for you, or scrolls lists that load as yo
   <img src="img/dark.png" width="360" alt="DigUp in dark mode, having found the page's Next button, ready to collect more pages.">
 </p>
 
+### 🗂️ Tickets, boards and dashboards
+Made for the views people pull data from every day in ticket trackers and project tools:
+- **Boards:** a board of cards (To do, In progress, Done) becomes one table, a row per card with the column it sits in. Columns that load cards as you scroll are scrolled one by one.
+- **Dashboards:** each table is named after the box it sits in, and **All tables as one Excel file** saves every table on the page in one workbook, a sheet each.
+- **Ticket searches:** the columns you see on screen, every page of results, and a note when a split view hides columns.
+
 ### 🔎 Details from each item's page
 A list often shows only a title and a price. **Details from each page** opens every item's own page and adds fields such as description, company, date, location, email and phone, as new columns. It only visits the site you are scraping.
 
@@ -75,7 +81,7 @@ A list often shows only a title and a price. **Details from each page** opens ev
 </p>
 
 ### 🔔 Know when a page changes
-Turn on a check and DigUp reads the page again every 12 hours, every day or every week while Chrome is open. You see what is **new, changed or gone**, with price drops first, for example *Trail Running Shoes: Price: $89.99 → $74.99 (−17%)*. A number on DigUp's icon tells you there is something new, and changes can also go to a Google Sheet, a webhook or your team chat.
+Turn on a check and DigUp reads the page again every 12 hours, every day or every week while Chrome is open. You see what is **new, changed or gone**, with price drops first, for example *Trail Running Shoes: Price: $89.99 → $74.99 (−17%)*. A number on DigUp's icon tells you there is something new, and changes can also go to a Google Sheet, a webhook or your team chat. A check can also save a dated **Excel or CSV file** in your Downloads folder each time it runs.
 
 <p align="center">
   <img src="img/changed.png" width="560" alt="DigUp's Saved setups page: 2 new, 3 changed and 1 gone, with Trail Running Shoes down from $89.99 to $74.99 (−17%).">
@@ -87,6 +93,12 @@ Where Chrome's built-in AI is already on your computer, DigUp can add columns su
 ### 🤖 A scraping tool for AI agents
 AI apps such as Claude, Cursor and other MCP apps can use DigUp to list your open pages, find the lists on a page and scrape it, in your own Chrome. It is off until you turn it on. See the [AI agents guide](https://satyasampathirao.github.io/DigUp/ai-agents.html).
 
+### 📁 Files on your computer
+Read saved web pages, CSV, Excel, JSON, Word and PDF files, and scans or photos of text into one table, or paste a list of web addresses and read every page with one setup. Files are read on your computer and never uploaded.
+
+### 🧾 Edit like a spreadsheet
+**Open as page** shows the rows in an editable table: trim spaces, fix case, keep numbers, split columns, remove duplicates, bring in columns from another table, and save as CSV, Excel or PDF.
+
 ### 💾 Saved setups you can share
 DigUp remembers your list, columns and Next button for each website, so next time it is one click. **Share** a setup as text or a file, and **Import** one someone sent you.
 
@@ -97,6 +109,7 @@ Duplicate rows and mostly empty columns are each removed in one click. Ratings s
 
 | Use case | What you get |
 |---|---|
+| **Tickets and projects** | Tickets, boards and dashboards from ticket trackers and project tools, as a spreadsheet |
 | **Lead lists** | Names, companies, emails and phone numbers from directories and member pages |
 | **Price tracking** | Shop pages checked every day, with price drops first |
 | **Job research** | Titles, companies, locations and salaries, with new postings flagged |
@@ -130,7 +143,10 @@ Duplicate rows and mostly empty columns are each removed in one click. Ratings s
 Yes. No account, no credits and no row limits. Everything runs on your computer, so there are no servers to pay for.
 
 **Does DigUp send my data anywhere?**
-No. Pages are read in your browser and nothing is sent to the developer. Rows leave your browser only when you send them to a Google Sheet or a webhook you chose. See the [privacy policy](https://satyasampathirao.github.io/DigUp/privacy.html).
+No. Pages are read in your browser and the data you copy is never sent to the developer. Rows leave your browser only when you send them to a Google Sheet or a webhook you chose. See the [privacy policy](https://satyasampathirao.github.io/DigUp/privacy.html).
+
+**What is usage sharing?**
+The first time you open DigUp it asks once whether you want to share how you use it: which features you use and the names of the sites you use them on, sent once a day to Google Analytics. Never page addresses or the data you copy. **Accept** and **No thanks** are equal choices, DigUp works the same either way, and you can change it any time in DigUp's menu, under Usage sharing.
 
 **Which websites does it work on?**
 Most pages with a table or a repeating list: shops, directories, job boards, search results and more. Chrome's own pages and the Chrome Web Store are off-limits to all extensions. Please respect each website's terms of use.
